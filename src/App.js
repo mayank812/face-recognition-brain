@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ParticlesBg from 'particles-bg';
-// import Clarifai from 'clarifai';
+import Clarifai from 'clarifai';
 import Navigation from './components/Navigation/Navigation';
 import Rank from './components/Rank/Rank';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
@@ -9,17 +9,17 @@ import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 import './App.css';
 
-/* const app = new Clarifai.App({
-apiKey: ''
-}); */
+const app = new Clarifai.App({
+apiKey: '200e11dca8764afbaadb74cab5776de7'
+});
 
-const returnClarifaiRequestOptions = (imageUrl) => {
+/* const returnClarifaiRequestOptions = (imageUrl) => {
 // Your PAT (Personal Access Token) can be found in the portal under Authentification
 const PAT = '5378cf10d78946528b8323ee456505e1';
 // Specify the correct user_id/app_id pairings
 // Since you're making inferences outside your app's scope
 const USER_ID = 'ta57g66dxf5k';       
-const APP_ID = 'my-first-application';
+const APP_ID = '6f5724ee6ac147b2bbddc7ace2d0407e';
 // Change these to whatever model and image URL you want to use
  
 const IMAGE_URL = imageUrl;
@@ -50,7 +50,7 @@ const requestOptions = {
 };
 
 return requestOptions;
-}
+} */
 
 // NOTE: MODEL_VERSION_ID is optional, you can also call prediction with the MODEL_ID only
 // https://api.clarifai.com/v2/models/{YOUR_MODEL_ID}/outputs
@@ -92,9 +92,10 @@ class App extends Component {
 
     onButtonSubmit = () => {
       this.setState({imageUrl: this.state.input});
-      // app.models.predict('face-detection', this.state.input)
-      const MODEL_ID = 'face-detection';
-      fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
+      
+      /* const MODEL_ID = 'face-detection';
+      fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", returnClarifaiRequestOptions(this.state.input)) */
+      app.models.predict('face-detection', this.state.input)
           .then(response => response.json())
           .then(result => console.log(result))
           .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
