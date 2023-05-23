@@ -96,8 +96,8 @@ class App extends Component {
       /* const MODEL_ID = 'face-detection';
       fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", returnClarifaiRequestOptions(this.state.input)) */
       app.models.predict('face-detection', this.state.input)
-          .then(response => response.json())
-          .then(result => console.log(result))
+          /* .then(response => response.json())
+          .then(result => console.log(result)) */
           .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
           .catch(err => console.log(err));
     }
